@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/telegram_bot_jr_db?useSSL=false&amp;serverTimezone=UTC
+    username: postgres
+    password: calm
+  jpa:
+    show-sql: true
+    generate-ddl: false
+    hibernate:
+      ddl-auto: update
