@@ -32,6 +32,6 @@ public class SendBotMessageServiceTest {
         //when
         sendBotMessageService.sendMessage(chatId, message);
         //then
-        Mockito.verify(telegramBotJR.execute(sendMessage));
+        Mockito.verify(telegramBotJR).execute(sendMessage);
     }
 }
