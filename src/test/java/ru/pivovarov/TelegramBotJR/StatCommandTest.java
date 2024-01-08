@@ -2,21 +2,21 @@ package ru.pivovarov.TelegramBotJR;
 
 import ru.pivovarov.TelegramBotJR.command.Command;
 import ru.pivovarov.TelegramBotJR.command.CommandName;
-import ru.pivovarov.TelegramBotJR.command.StopCommand;
+import ru.pivovarov.TelegramBotJR.command.StatCommand;
 
-public class StopCommandTest extends AbstractCommandTest {
+public class StatCommandTest extends AbstractCommandTest {
     @Override
     String getCommandName() {
-        return CommandName.STOP.getCommandName();
+        return CommandName.STAT.getCommandName();
     }
 
     @Override
     String getCommandMessage() {
-        return StopCommand.STOP_MESSAGE;
+        return StatCommand.STAT_MESSAGE;
     }
 
     @Override
     Command getCommand() {
-        return new StopCommand(sendBotMessageService, telegramUserService);
+        return new StatCommand(sendBotMessageService, telegramUserService);
     }
 }

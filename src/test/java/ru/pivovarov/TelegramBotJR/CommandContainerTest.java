@@ -10,6 +10,7 @@ import ru.pivovarov.TelegramBotJR.command.CommandContainer;
 import ru.pivovarov.TelegramBotJR.command.CommandName;
 import ru.pivovarov.TelegramBotJR.command.UnknownCommand;
 import ru.pivovarov.TelegramBotJR.service.SendBotMessageService;
+import ru.pivovarov.TelegramBotJR.service.TelegramUserService;
 
 import java.util.Arrays;
 
@@ -20,7 +21,9 @@ public class CommandContainerTest {
 
     @BeforeEach
     public void init() {
-        commandContainer = new CommandContainer(Mockito.mock(SendBotMessageService.class));
+        SendBotMessageService sendBotMessageService = Mockito.mock(SendBotMessageService.class);
+        TelegramUserService telegramUserService = Mockito.mock(TelegramUserService.class);
+        commandContainer = new CommandContainer(sendBotMessageService, telegramUserService);
     }
 
     @Test

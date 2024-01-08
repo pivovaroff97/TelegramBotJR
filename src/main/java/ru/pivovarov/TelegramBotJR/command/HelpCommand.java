@@ -3,9 +3,7 @@ package ru.pivovarov.TelegramBotJR.command;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import ru.pivovarov.TelegramBotJR.service.SendBotMessageService;
 
-import static ru.pivovarov.TelegramBotJR.command.CommandName.START;
-import static ru.pivovarov.TelegramBotJR.command.CommandName.STOP;
-import static ru.pivovarov.TelegramBotJR.command.CommandName.HELP;
+import static ru.pivovarov.TelegramBotJR.command.CommandName.*;
 
 public class HelpCommand implements Command {
 
@@ -19,8 +17,9 @@ public class HelpCommand implements Command {
                     %s - приостановить работу со мной
 
                     %s - получить помощь в работе со мной
+                    %s - узнать количество активных пользователей
                     """,
-            START.getCommandName(), STOP.getCommandName(), HELP.getCommandName());
+            START.getCommandName(), STOP.getCommandName(), HELP.getCommandName(), STAT.getCommandName());
 
     // Здесь не добавляем сервис через получение из Application Context.
     // Потому что если это сделать так, то будет циклическая зависимость, которая

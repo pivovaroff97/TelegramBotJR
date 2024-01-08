@@ -2,9 +2,23 @@ version: '3.1'
 
 services:
   telegrambotjr:
+    depends_on:
+      - telegrambotjr-db
     build:
       context: .
     environment:
       - BOT_NAME=${BOT_NAME}
       - BOT_TOKEN=${BOT_TOKEN}
+      - BOT_DB_USERNAME=${BOT_DB_USERNAME}
+      - BOT_DB_PASSWORD=${BOT_DB_PASSWORD}
     restart: always
+
+  telegrambotjr-db:
+    image: postgres:latest
+    restart: always
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_USER: ${BOT_DB_USERNAME}
+      POSTGRES_PASSWORD: ${BOT_DB_PASSWORD}
+      POSTGRES_DB: prod_telegrambotjr

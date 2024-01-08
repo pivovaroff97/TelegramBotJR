@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5433/dev_telegrambotjr?useSSL=false&amp;serverTimezone=UTC
+    username: dev_user
+    password: dev_user
+tg-bot:
+  username: tg_JR_my_bot
+  token: 123token321
