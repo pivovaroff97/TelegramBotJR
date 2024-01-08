@@ -1,11 +1,13 @@
 package ru.pivovarov.TelegramBotJR;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import ru.pivovarov.TelegramBotJR.command.CommandContainer;
 import ru.pivovarov.TelegramBotJR.service.SendBotMessageServiceImpl;
+import ru.pivovarov.TelegramBotJR.service.TelegramUserService;
 
 import static ru.pivovarov.TelegramBotJR.command.CommandName.NO;
 
@@ -19,9 +21,10 @@ public class TelegramBotJR extends TelegramLongPollingBot {
 
     public static String COMMAND_PREFIX = "/";
 
-    public TelegramBotJR(@Value("${tg-bot.token}") String botToken) {
+    @Autowired
+    public TelegramBotJR(@Value("${tg-bot.token}") String botToken, TelegramUserService telegramUserService) {
         super(botToken);
-        this.commandContainer = new CommandContainer(new SendBotMessageServiceImpl(this));
+        this.commandContainer = new CommandContainer(new SendBotMessageServiceImpl(this), telegramUserService);
     }
 
     @Override

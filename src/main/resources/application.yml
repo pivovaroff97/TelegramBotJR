@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/telegram_bot_jr_db?useSSL=false&amp;serverTimezone=UTC
-    username: postgres
-    password: calm
+    url: jdbc:postgresql://telegrambotjr-db:5432/telegrambotjr_db?useSSL=false&amp;serverTimezone=UTC
+    username: prod_user
+    password: prod_user
 tg-bot:
   username: tg_JR_my_bot
   token: 123token321

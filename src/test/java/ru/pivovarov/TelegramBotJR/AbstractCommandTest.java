@@ -9,9 +9,11 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import ru.pivovarov.TelegramBotJR.command.Command;
 import ru.pivovarov.TelegramBotJR.service.SendBotMessageService;
 import ru.pivovarov.TelegramBotJR.service.SendBotMessageServiceImpl;
+import ru.pivovarov.TelegramBotJR.service.TelegramUserService;
 
 public abstract class AbstractCommandTest {
     protected TelegramBotJR telegramBotJR = Mockito.mock(TelegramBotJR.class);
+    protected TelegramUserService telegramUserService = Mockito.mock(TelegramUserService.class);
     protected SendBotMessageService sendBotMessageService = new SendBotMessageServiceImpl(telegramBotJR);
 
     abstract String getCommandName();
