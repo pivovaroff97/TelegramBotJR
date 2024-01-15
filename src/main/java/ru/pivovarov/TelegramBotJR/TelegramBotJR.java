@@ -6,6 +6,8 @@ import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import ru.pivovarov.TelegramBotJR.command.CommandContainer;
+import ru.pivovarov.TelegramBotJR.jrclient.JavaRushGroupClient;
+import ru.pivovarov.TelegramBotJR.service.GroupSubService;
 import ru.pivovarov.TelegramBotJR.service.SendBotMessageServiceImpl;
 import ru.pivovarov.TelegramBotJR.service.TelegramUserService;
 
@@ -22,9 +24,14 @@ public class TelegramBotJR extends TelegramLongPollingBot {
     public static String COMMAND_PREFIX = "/";
 
     @Autowired
-    public TelegramBotJR(@Value("${tg-bot.token}") String botToken, TelegramUserService telegramUserService) {
+    public TelegramBotJR(@Value("${tg-bot.token}") String botToken, TelegramUserService telegramUserService,
+                         JavaRushGroupClient groupClient, GroupSubService groupSubService) {
         super(botToken);
-        this.commandContainer = new CommandContainer(new SendBotMessageServiceImpl(this), telegramUserService);
+        this.commandContainer = new CommandContainer(
+                new SendBotMessageServiceImpl(this),
+                telegramUserService,
+                groupClient,
+                groupSubService);
     }
 
     @Override
