@@ -11,7 +11,7 @@ import java.util.List;
 
 @DisplayName("Integration-level testing for JavaRushPostClient")
 public class JavaRushPostClientTest {
-    private final JavaRushPostClient postClient = new JavaRushPostClientImpl("https://javarush.com/api/1.0/rest/posts");
+    private final JavaRushPostClient postClient = new JavaRushPostClientImpl("https://javarush.com/api/1.0/rest");
 
     @Test
     public void shouldProperlyGetNew15Posts() {
