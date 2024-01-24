@@ -6,6 +6,7 @@ spring:
 tg-bot:
   username: tg_JR_my_bot
   token: 123token321
+  recountNewArticleFixedRate: 900000
 javarush:
   api:
     path: https://javarush.com/api/1.0/rest

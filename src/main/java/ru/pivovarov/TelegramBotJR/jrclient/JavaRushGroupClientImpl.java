@@ -4,20 +4,22 @@ import kong.unirest.GenericType;
 import kong.unirest.Unirest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import ru.pivovarov.TelegramBotJR.jrclient.dto.GroupCountRequestArgs;
-import ru.pivovarov.TelegramBotJR.jrclient.dto.GroupDiscussionInfo;
-import ru.pivovarov.TelegramBotJR.jrclient.dto.GroupInfo;
-import ru.pivovarov.TelegramBotJR.jrclient.dto.GroupRequestArgs;
+import ru.pivovarov.TelegramBotJR.jrclient.dto.*;
 
 import java.util.List;
+import java.util.Optional;
+
+import static org.springframework.util.CollectionUtils.isEmpty;
 
 @Component
 public class JavaRushGroupClientImpl implements JavaRushGroupClient {
 
     private final String javarushApiGroupPath;
+    private final String javarushApiPostGroupPath;
 
     public JavaRushGroupClientImpl(@Value("${javarush.api.path}") String javarushApi) {
         this.javarushApiGroupPath = javarushApi + "/groups";
+        this.javarushApiPostGroupPath = javarushApi + "/posts";
     }
     @Override
     public List<GroupInfo> getGroupList(GroupRequestArgs requestArgs) {
@@ -51,5 +53,17 @@ public class JavaRushGroupClientImpl implements JavaRushGroupClient {
         return Unirest.get(String.format("%s/group%s", javarushApiGroupPath, id.toString()))
                 .asObject(GroupDiscussionInfo.class)
                 .getBody();
+    }
+
+    @Override
+    public Integer findLastArticleId(Integer groupSubId) {
+        List<PostInfo> posts = Unirest.get(javarushApiPostGroupPath)
+                .queryString("order", "NEW")
+                .queryString("groupKid", groupSubId.toString())
+                .queryString("limit", "1")
+                .asObject(new GenericType<List<PostInfo>>() {
+                })
+                .getBody();
+        return isEmpty(posts) ? 0 : Optional.ofNullable(posts.get(0)).map(PostInfo::getId).orElse(0);
     }
 }
