@@ -1,4 +1,4 @@
-INSERT INTO tg_user VALUES (1, 1);
+INSERT INTO tg_user VALUES (1, true);
 
 INSERT INTO group_sub VALUES
 (1, 'g1', 1),

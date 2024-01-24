@@ -49,7 +49,7 @@ public class TelegramUserRepositoryIT {
         Assertions.assertEquals(telegramUser, saved.get());
     }
 
-    @Sql(scripts = {"/sql/clearDbs.sql", "/sql/fiveGroupSubsForUser.sql"})
+    @Sql(scripts = {"/sql/clearDb.sql", "/sql/fiveGroupSubsForUser.sql"})
     @Test
     public void shouldProperlyGetAllGroupSubsForUser() {
         //when
