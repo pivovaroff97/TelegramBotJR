@@ -6,6 +6,10 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import ru.pivovarov.TelegramBotJR.TelegramBotJR;
 
+import java.util.List;
+
+import static org.springframework.util.CollectionUtils.isEmpty;
+
 @Service
 public class SendBotMessageServiceImpl implements SendBotMessageService {
 
@@ -16,7 +20,7 @@ public class SendBotMessageServiceImpl implements SendBotMessageService {
         this.telegramBotJR = telegramBotJR;
     }
     @Override
-    public void sendMessage(String chatId, String message) {
+    public void sendMessage(Long chatId, String message) {
         SendMessage sendMessage = new SendMessage();
         sendMessage.setChatId(chatId);
         sendMessage.enableHtml(true);
@@ -27,5 +31,11 @@ public class SendBotMessageServiceImpl implements SendBotMessageService {
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void sendMessage(Long chatId, List<String> message) {
+        if (isEmpty(message)) return;
+        message.forEach(m -> sendMessage(chatId, m));
     }
 }

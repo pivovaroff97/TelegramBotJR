@@ -19,7 +19,7 @@ public class GroupSubListCommand implements Command {
 
     @Override
     public void execute(Update update) {
-        String chatId = String.valueOf(update.getMessage().getChatId());
+        Long chatId = update.getMessage().getChatId();
         //todo add exception handling
         TelegramUser telegramUser = telegramUserService.findByChatId(chatId)
                 .orElseThrow(NotFoundException::new);
